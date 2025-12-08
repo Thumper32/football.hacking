@@ -143,20 +143,7 @@ FONT_URL = ('https://raw.githubusercontent.com/google/fonts/main/apache/robotosl
         'RobotoSlab%5Bwght%5D.ttf')
 robotto_bold = FontManager(FONT_URL)
 
-st.set_page_config(page_title="Compare Teams")
-
-with st.sidebar:
-    st.image('static/image.png', 
-             caption="Saulo Faria - Data Scientist Specialized in Football")
-    st.write("This application has been designed to help analysts and bettors understand how the match will unfold. By offering insights based on historical data, it empowers users to make informed predictions and refine their betting strategies. Whether you're an experienced analyst or just starting out in betting, this tool aims to enhance your comprehension of game dynamics and potential outcomes. Contact me: football.data@saulofaria.com.br")
-
-    st.subheader("My links (pt-br)")
-    st.link_button("Substack", "https://substack.com/@saulofaria", use_container_width=True)
-    st.link_button("Youtube", "https://www.youtube.com/channel/UCkSw2eyetrr8TByFis0Uyug", use_container_width=True)
-    st.link_button("Instagram", "https://www.instagram.com/saulo.foot/", use_container_width=True)
-    st.link_button("X (Twitter)", "https://x.com/fariasaulo_", use_container_width=True)
-    st.link_button("LinkedIn", "https://www.linkedin.com/in/saulo-faria-318b872b9/", use_container_width=True)
-    
+st.set_page_config(page_title="Compare Teams")    
 
 try:
     st.html("""
