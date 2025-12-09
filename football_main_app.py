@@ -17,7 +17,7 @@ if not st.user.is_logged_in:
     ], position='top')
 
     pg_1.run()
-    if st.button("Log in with Google", width=250, type='primary'):
+    if st.button("Log in with Google", width=250, type='primary', icon='static/icon.png'):
         st.login()
 else:
     emails = col_users.distinct('email')
