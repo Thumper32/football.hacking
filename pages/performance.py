@@ -140,7 +140,7 @@ st.set_page_config(
 )
 
 
-st.title("Squad Analysis Based on Relative Performance - Current Season")
+st.title("Squad Analysis Based on Relative Performance (from round 5 on) - Current Season")
 st.subheader("How much does the opponents’ average performance decrease when facing the selected squad?")
 st.write("Except for Standard Deviation, all metrics are presented so that lower values indicate better performance.")
 
