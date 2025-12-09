@@ -3,11 +3,13 @@ import streamlit as st
 st.set_page_config(page_icon='static/image.png')
 
 pg = st.navigation([
+    st.Page('pages/home.py', title='Home'),
     st.Page('pages/soccer_stats_app.py', title='True Performance'),
     st.Page('pages/leagues_overview.py', title='Leagues Overview'), 
     st.Page('pages/match_analysis.py', title='Matches xG Stats'), 
     st.Page('pages/performance.py', title='Relative Performance'), 
-    st.Page('pages/xt_stats_app.py', title='Passes Metrics')
+    st.Page('pages/xt_stats_app.py', title='Passes Metrics'),
+    st.Page('pages/about.py', title='About Me')
 ], position='top')
 
 with st.sidebar:
