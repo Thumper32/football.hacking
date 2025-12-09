@@ -2,7 +2,7 @@ import streamlit as st
 
 # st.image("static/banner.png", width=800)
 
-st.title("Welcome to Football Hacking")
+st.title("Welcome to the Football Hacking App")
 st.text("""You’ve just entered a data–driven environment designed to transform raw football events into structured, interpretable, and decision-ready insights.
 
 Our platform integrates automated data acquisition, advanced preprocessing pipelines, and analytical models that highlight patterns invisible to traditional metrics. Every chart, table, and metric is dynamically generated, allowing you to explore match behavior through reproducible, transparent, and noise-free data.
