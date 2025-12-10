@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-from pymongo import MongoClient
+from football_main_app import col_fotmob
 from urllib.request import urlopen
 from matplotlib.offsetbox import OffsetImage, AnnotationBbox
 import matplotlib.pyplot as plt
@@ -12,11 +12,7 @@ from typing import Union
 
 st.set_page_config(page_title="Leagues Overview")
 
-#mongodb connection
-client = MongoClient(st.secrets['url_con'])
-db = client.football_data
-collection = db.fotmob_stats
-
+collection = col_fotmob
 
 #setting colors
 background = '#e1ece1'
