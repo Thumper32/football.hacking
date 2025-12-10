@@ -1,15 +1,13 @@
 #libraries
-from pymongo import MongoClient, collection
+from pymongo import collection
+from football_main_app import col_fotmob
 import pandas as pd
 import numpy as np
 import plotly.express as px
 from statistics import mean
 import streamlit as st
 
-#mongodb connection
-client = MongoClient(st.secrets['url_con'])
-db = client.football_data
-col = db.fotmob_stats
+col = col_fotmob
 
 cups = ['INT', 'INT-2']
 YEAR = 2025
