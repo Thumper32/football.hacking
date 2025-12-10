@@ -6,7 +6,7 @@ import plotly.express as px
 import matplotlib.pyplot as plt
 import seaborn as sns
 import networkx as nx
-from pymongo import MongoClient
+from football_main_app import col_whoscored_calendar, col_whoscored_matches
 import json
 
 #setting colors
@@ -19,11 +19,8 @@ with open('static/xt_metrics.json', 'r') as f:
 
 xt_array = np.array(xt_metrics)
 
-# mongodb connection
-conn = MongoClient(st.secrets['url_con'])
-db = conn.football_data
-col_calendar = db.whoscored_calendar
-col_matches = db.whoscored_matches
+col_calendar = col_whoscored_calendar
+col_matches = col_whoscored_matches
 
 # function to get teams names
 @st.cache_data(ttl='12h', show_spinner=False)
