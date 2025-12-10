@@ -6,6 +6,12 @@ client = MongoClient(st.secrets['url_board'])
 db_local = client.football_data
 col_users = db_local.users
 
+client = MongoClient(st.secrets['url_con'])
+db = client.football_data
+col_fotmob = db.fotmob_stats
+col_whoscored_calendar = db.whoscored_calendar
+col_whoscored_matches = db.whoscored_matches
+
 st.set_page_config(page_icon='static/image.png')
 
 if not st.user.is_logged_in:
