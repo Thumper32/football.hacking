@@ -1,8 +1,10 @@
 #libraries
 import streamlit as st
 import pandas as pd
-from football_main_app import col_fotmob
+from pymongo import collection
 import plotly.express as px
+from football_main_app import col_fotmob
+
 
 col = col_fotmob
 
