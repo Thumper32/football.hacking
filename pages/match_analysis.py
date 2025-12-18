@@ -61,7 +61,7 @@ home_names = list(home_teams.keys())
 away_names = list(away_teams.keys())
 
 #form to select the teams
-with st.form('my-form'):
+with st.form(key='match_stats'):
     if 'home' not in st.session_state:
         st.session_state['home'] = home_teams[home_names[0]]['name']
     
