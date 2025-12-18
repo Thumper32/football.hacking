@@ -175,7 +175,7 @@ try:
     squads = list(df['Squad'])    
     
     
-    with st.form("my-form"):                 
+    with st.form(key="true_perf"):                 
         if 'home_team' not in st.session_state:
             st.session_state['home_team'] = squads[0]
         
