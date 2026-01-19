@@ -9,13 +9,18 @@ from mplsoccer import Radar, FontManager
 leagues = {
     "Brazil - Brasileirão A": "brazil",      
     "England - Premier League": "england",
+    "England - Championship": "england2",
+    "England - League One": "england3",
+    "England - League Two": "england4",
     "Germany - Bundesliga": "germany",
+    "Germany - 2. Bundesliga": "germany2", 
     "Italy - Serie A": "italy",
     "France - Ligue 1": "france",
     "Spain - La Liga": "spain",
     "Portugal - Liga Portugal": 'portugal',
     "Belgium - Pro League": "belgium",
     "Netherlands - Eredivisie": "netherlands", 
+    "Turkey - Super Lig": "turkey", 
 }
 
 
