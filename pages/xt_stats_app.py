@@ -379,21 +379,21 @@ def plot_flow_map(data: pd.DataFrame, home_team: str, away_team: str) -> None:
 
 def input_form():
     with st.form(key='xt_app'):
-    if 'home' not in st.session_state:
-        st.session_state['home'] = home_names[0]
+        if 'home' not in st.session_state:
+            st.session_state['home'] = home_names[0]
+        
+        if 'away' not in st.session_state:
+            st.session_state['away'] = away_names[0]
     
-    if 'away' not in st.session_state:
-        st.session_state['away'] = away_names[0]
-
-    col1, col2 = st.columns(2)
-
-    with col1:
-        home = st.selectbox(label="Select a Home Team", options=home_names, index=0)
+        col1, col2 = st.columns(2)
     
-    with col2:
-        away = st.selectbox(label="Select an Away Team", options=away_names, index=1)
-
-    submitted = st.form_submit_button("Submit")
+        with col1:
+            home = st.selectbox(label="Select a Home Team", options=home_names, index=0)
+        
+        with col2:
+            away = st.selectbox(label="Select an Away Team", options=away_names, index=1)
+    
+        submitted = st.form_submit_button("Submit")
 
     return submitted, home, away
 # set the streamlit page
