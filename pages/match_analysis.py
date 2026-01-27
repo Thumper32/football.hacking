@@ -69,7 +69,7 @@ def input_form():
     
         submitted = st.form_submit_button("Submit")
 
-        return submitted, home, away
+    return submitted, home, away
 
 st.set_page_config(page_title='Match Plots', layout='wide')
 
