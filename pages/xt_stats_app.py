@@ -377,22 +377,8 @@ def plot_flow_map(data: pd.DataFrame, home_team: str, away_team: str) -> None:
     G_home, G_away = make_graphs(data=pd.concat([home_passes_df, away_passes_df]), home_team=home_team, away_team=away_team)
     plot_graphs(graph_home=G_home, graph_away=G_away, home_color='b', away_color='r')
 
-# set the streamlit page
-st.set_page_config(
-    page_title='Pass and Expected Threat(xT) Information', 
-    layout='wide'
-)
-
-
-# set title of the page
-st.title('Pass and Expected Threat(xT) Information - Current Season')
-
-# get teams names
-home_names = get_names(venue='home')
-away_names = get_names(venue='away')
-
-# form
-with st.form(key='xt_app'):
+def input_form():
+    with st.form(key='xt_app'):
     if 'home' not in st.session_state:
         st.session_state['home'] = home_names[0]
     
@@ -409,29 +395,64 @@ with st.form(key='xt_app'):
 
     submitted = st.form_submit_button("Submit")
 
-    if submitted:
-        try:
-            st.session_state['home'] = home
-            st.session_state['away'] = away
+    return submitted, home, away
+# set the streamlit page
+st.set_page_config(
+    page_title='Pass and Expected Threat(xT) Information', 
+    layout='wide'
+)
 
-            match = get_match_data(home_team=st.session_state['home'], away_team=st.session_state['away'])
-            if not match:
-                st.text("This match may not have occurred yet, or the teams may not belong to the same national league")
-            else:
-                passes_df = get_passes_df(match_id=match['game_id'], xt_array=xt_array)
-                passes_grouped_df = get_grouped_pass_df(passes_df)
-                centralities_df = get_centralities_df(passes_df, home_team=home, away_team=away)
-                passes_grouped_df.loc[:, 'load centrality'] = centralities_df['load centrality'].values
-                passes_grouped_df.loc[:, 'closeness centrality'] = centralities_df['closeness centrality'].values
-                passes_grouped_df.loc[:, 'eigenvector centrality'] = centralities_df['eigenvector centrality'].values
-                passes_grouped_df.loc[:, 'pagerank'] = centralities_df['pagerank'].values
-                players = sorted(passes_grouped_df['player'].unique().tolist())
+
+# set title of the page
+st.title('Pass and Expected Threat(xT) Information - Current Season')
+
+# get teams names
+home_names = get_names(venue='home')
+away_names = get_names(venue='away')
+
+# form
+# with st.form(key='xt_app'):
+#     if 'home' not in st.session_state:
+#         st.session_state['home'] = home_names[0]
+    
+#     if 'away' not in st.session_state:
+#         st.session_state['away'] = away_names[0]
+
+#     col1, col2 = st.columns(2)
+
+#     with col1:
+#         home = st.selectbox(label="Select a Home Team", options=home_names, index=0)
+    
+#     with col2:
+#         away = st.selectbox(label="Select an Away Team", options=away_names, index=1)
+
+#     submitted = st.form_submit_button("Submit")
+
+submitted, home, away = input_form()
+
+if submitted:
+    try:
+        st.session_state['home'] = home
+        st.session_state['away'] = away
+
+        match = get_match_data(home_team=st.session_state['home'], away_team=st.session_state['away'])
+        if not match:
+            st.text("This match may not have occurred yet, or the teams may not belong to the same national league")
+        else:
+            passes_df = get_passes_df(match_id=match['game_id'], xt_array=xt_array)
+            passes_grouped_df = get_grouped_pass_df(passes_df)
+            centralities_df = get_centralities_df(passes_df, home_team=home, away_team=away)
+            passes_grouped_df.loc[:, 'load centrality'] = centralities_df['load centrality'].values
+            passes_grouped_df.loc[:, 'closeness centrality'] = centralities_df['closeness centrality'].values
+            passes_grouped_df.loc[:, 'eigenvector centrality'] = centralities_df['eigenvector centrality'].values
+            passes_grouped_df.loc[:, 'pagerank'] = centralities_df['pagerank'].values
+            players = sorted(passes_grouped_df['player'].unique().tolist())
 
 
                 
                 
-        except Exception as e:
-            st.text('Something is not right! Maybe this match hasn’t occurred yet.')
+    except Exception as e:
+        st.text('Something is not right! Maybe this match hasn’t occurred yet.')
 
 try:
     col3, col4 = st.columns([6.1, 3.9])
