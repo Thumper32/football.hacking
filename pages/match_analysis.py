@@ -10,8 +10,8 @@ col = col_fotmob
 
 #list of the teams
 cups = ['INT', 'INT-2']
-YEAR = 2025
-SEASONS = [f"{YEAR}", f"{YEAR}/{YEAR+1}"]
+YEAR = 2026
+SEASONS = [f"{YEAR}", f"{YEAR-1}/{YEAR}"]
 
 leagues = col.find({'general.country': {"$nin": cups}, 'general.season': {'$in': SEASONS}}).distinct('general.league')
 away_teams = col.distinct('teams.away.name')
