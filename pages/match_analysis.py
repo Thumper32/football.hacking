@@ -133,7 +133,7 @@ if submitted:
                 st.image(f"{match['teams']['away']['image']}", use_container_width=True)
                 
 
-            fig = px.scatter(data_frame=df_shots, x='min', y='xg', color='team', color_discrete_sequence=[color_home, color_away], size='size',
+            fig = px.scatter(data_frame=df_shots, x='min', y='xg', color='team', color_discrete_sequence=[color_home, color_away], size='size', symbol='outcome', 
                                     hover_name='team', hover_data={'xgot': True, 'team': False, 'player': True, 'type': True, 'situation': True, 'outcome': True, 'size': False},  
                                     range_y=[0, 1], title='xG by Minute and its xGOT (Size)', labels={'min': 'Minutes', 'xg': 'xG'}
                                     
