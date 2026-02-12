@@ -441,9 +441,9 @@ if submitted:
 try:
     tab1, tab2 = st.tabs(['Passes', 'Centralities'])
     with tab1:
-        st.dataframe(passes_df.sort_values(by='minute'))
+        st.dataframe(passes_df.sort_values(by='minute'), hide_index=True)
     with tab2:
-        st.dataframe(centralities_df)
+        st.dataframe(centralities_df, hide_index=True)
     
     col3, col4 = st.columns([6.1, 3.9])
     
