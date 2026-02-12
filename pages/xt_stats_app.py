@@ -410,24 +410,6 @@ st.title('Pass and Expected Threat(xT) Information - Current Season')
 home_names = get_names(venue='home')
 away_names = get_names(venue='away')
 
-# form
-# with st.form(key='xt_app'):
-#     if 'home' not in st.session_state:
-#         st.session_state['home'] = home_names[0]
-    
-#     if 'away' not in st.session_state:
-#         st.session_state['away'] = away_names[0]
-
-#     col1, col2 = st.columns(2)
-
-#     with col1:
-#         home = st.selectbox(label="Select a Home Team", options=home_names, index=0)
-    
-#     with col2:
-#         away = st.selectbox(label="Select an Away Team", options=away_names, index=1)
-
-#     submitted = st.form_submit_button("Submit")
-
 submitted, home, away = input_form()
 
 if submitted:
@@ -455,6 +437,8 @@ if submitted:
         st.text('Something is not right! Maybe this match hasn’t occurred yet.')
 
 try:
+    st.dataframe(centralities_df)
+    
     col3, col4 = st.columns([6.1, 3.9])
     
     with col3:        
