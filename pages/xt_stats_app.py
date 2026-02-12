@@ -32,7 +32,7 @@ def get_names(venue: str) -> list[str]:
 # function to get match id
 @st.cache_data(ttl='12h', show_spinner=False)
 def get_match_data(home_team: str, away_team: str) -> int:
-    match_data = list(col_calendar.find({'home_team': home_team, 'away_team': away_team, 'season': {'$in': [2025, 2526]}}, {'_id': 0, 'game_id': 1, 'league': 1, "home_team": 1, "away_team": 1, 
+    match_data = list(col_calendar.find({'home_team': home_team, 'away_team': away_team, 'season': {'$in': [2026, 2526]}}, {'_id': 0, 'game_id': 1, 'league': 1, "home_team": 1, "away_team": 1, 
                                                                                     "home_score": 1, "away_score": 1}))
     return match_data[0]
 
