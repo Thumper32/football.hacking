@@ -437,7 +437,7 @@ if submitted:
         st.text('Something is not right! Maybe this match hasn’t occurred yet.')
 
 try:
-    tab1, tab2 = st.tabs('Passes', 'Centralities'[])
+    tab1, tab2 = st.tabs(['Passes', 'Centralities'])
     with tab1:
         st.dataframe(passes_df)
     with tab2:
