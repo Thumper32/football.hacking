@@ -67,7 +67,7 @@ def get_passes_df(match_id: int, xt_array: np.array) -> pd.DataFrame:
 
     passes_df.loc[:, 'start_zone_xt'] = passes_df[['x1_bin', 'y1_bin']].apply(lambda x: xt_array[x[1]][x[0]], axis=1)
     passes_df.loc[:, 'end_zone_xt'] = passes_df[['x2_bin', 'y2_bin']].apply(lambda x: xt_array[x[1]][x[0]], axis=1)
-    passes_df.loc[:, 'xt_final'] = round((passes_df['end_zone_xt'] - passes_df['start_zone_xt']), 2)
+    passes_df.loc[:, 'xt_final'] = round((passes_df['end_zone_xt'] - passes_df['start_zone_xt']), 4)
 
     home_passes_df = passes_df[passes_df['team'] == home_team]
     home_passes_df['xt_cumulative'] = home_passes_df['xt_final'].cumsum()
