@@ -79,7 +79,7 @@ def get_passes_df(match_id: int, xt_array: np.array) -> pd.DataFrame:
     away_passes_df.loc[:, 'end_y'] = (away_passes_df['end_y']-100) * -1
     away_passes_df['xt_cumulative'] = away_passes_df['xt_final'].cumsum()
 
-    passes_df = pd.concat([home_passes_df, away_passes_df])
+    passes_df = pd.concat([home_passes_df, away_passes_df], ignore_index=True)
 
     return passes_df
 
