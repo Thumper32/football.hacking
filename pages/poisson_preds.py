@@ -338,6 +338,8 @@ if submitted:
     with col2:
         plot_venue_performances(df=df_league, home_team=home, away_team=away)
 
+    st.divider()
+
     st.header('Probabilities and Odds')
     st.text('Odds between 1.70 and 2.00 stand out because, historically, they have delivered the highest ROI in the long run. But the decision is up to you.')
     col3, col4 = st.columns([10, 3])
