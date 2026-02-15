@@ -295,7 +295,7 @@ stats = get_stats(year=2026)
 df = stats_to_df(stats=stats)
 
 st.title('Poisson Probabilities')
-league = st.selectbox(label='Select a League:', options=df['league'].unique().sort(), index=0)
+league = st.selectbox(label='Select a League:', options=sorted(df['league'].unique()), index=0)
 df_league = df[df['league'] == league]
 
 st.dataframe(df_league.drop(columns=['home_image', 'away_image']), hide_index=True)
