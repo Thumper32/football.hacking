@@ -278,19 +278,6 @@ def create_colormap(colors: list) -> LinearSegmentedColormap:
 
     return custom_camp
 
-def plot_poisson_heatmap(df: pd.DataFrame, home_team: str, away_team: str, cmap: LinearSegmentedColormap) -> None:
-    fig, ax = plt.subplots(figsize=(20, 5))
-
-    ax.set_title('Poisson Probabilities %', fontweight='bold')
-    ax.set_xlabel(away_team)
-    ax.set_ylabel(home_team)
-    
-    sns.heatmap(goals_table, annot=True, fmt=".2f", cmap=cmap, linewidths=2, linecolor='k', ax=ax);
-    ax.invert_yaxis()
-    fig.set_facecolor("#e3f5ea")
-
-    return st.pyplot(fig)
-
 def plot_venue_performances(df: pd.DataFrame, home_team: str, away_team: str) -> None:
     df_home = df[df['home'] == home_team]
     df_away = df[df['away'] == away_team]
@@ -344,7 +331,7 @@ if submitted:
     col1, col2 = st.columns([9, 4])
 
     with col1:
-        plot_poisson_heatmap(df=goals_table, home_team=home, away_team=away, cmap=custom_cmap)
+        st.dataframe(goals_table.style.background_gradient(cmap=custom_cmap, axis=None))
     with col2:
         plot_venue_performances(df=df_league, home_team=home, away_team=away)
 
