@@ -335,6 +335,7 @@ if submitted:
 
     st.header('Probabilities and Odds')
     st.text('Odds between 1.70 and 2.00 stand out because, historically, they have delivered the highest ROI in the long run. But the decision is up to you.')
+    st.warning('These are the fair odds according to the Poisson distribution. They are not necessarily the odds offered by the bookmakers.', icon="⚠️")
     col3, col4 = st.columns([10, 3])
 
     with col3:
