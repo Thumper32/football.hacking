@@ -327,7 +327,7 @@ if submitted:
     col1, col2 = st.columns([9, 4])
 
     with col1:
-        st.dataframe(goals_table.style.background_gradient(cmap=custom_cmap, axis=None).round(2))
+        st.dataframe(goals_table.style.background_gradient(cmap=custom_cmap, axis=None).format(precision=2))
     with col2:
         plot_venue_performances(df=df_league, home_team=home, away_team=away)
 
