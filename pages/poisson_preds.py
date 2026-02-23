@@ -146,15 +146,8 @@ def dc_tau(i, j, lam_home, lam_away, rho):
         return 1 - rho
     return 1.0
 
-def apply_dixon_coles_to_matrix(P, lam_home, lam_away, rho: float, normalize=True):
-    """
-    P: matriz Poisson já pronta (probabilidades joint de placar)
-    lam_home, lam_away: lambdas originais usados/compatíveis com P
-    rho: parâmetro Dixon-Coles
-    """
+def apply_dixon_coles_to_matrix(P: np.outer, lam_home: float, lam_away: float, rho: float, normalize=True):
     P_dc = P.astype(float).copy()
-
-    # aplica só nos placares baixos
     for i in (0, 1):
         for j in (0, 1):
             if i < P_dc.shape[0] and j < P_dc.shape[1]:
