@@ -155,7 +155,7 @@ def apply_dixon_coles_to_matrix(P: np.outer, lam_home: float, lam_away: float, r
     if normalize:
         s = P_dc.sum()
         if s <= 0:
-            raise ValueError("Soma da matriz após ajuste ficou <= 0. Verifique rho/lambdas.")
+            raise ValueError("The sum of the matrix after adjustment was ≤ 0. Check rho/lambdas.")
         P_dc /= s
 
     return P_dc
