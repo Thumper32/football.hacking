@@ -135,7 +135,6 @@ def get_matrix_poisson(home_goals: float, away_goals: float, max_goals: int) -> 
 
 ##### correction low scores
 def dc_tau(i, j, lam_home, lam_away, rho):
-    # Fator tau do Dixon-Coles
     if i == 0 and j == 0:
         return 1 - (lam_home * lam_away * rho)
     if i == 1 and j == 0:
