@@ -27,11 +27,14 @@ if not st.user.is_logged_in:
         st.login()
 else:
     emails = col_users.distinct('email')
+    user_on_db = list(col_users.find({'email': user['email']}))[0]
+    plan = 'premium' if user_on_db['plan'] == 'premium' else 'free' 
     user = {
             'given_name': st.user.given_name, 
             'family_name': st.user.family_name, 
             'name': st.user.name, 
-            'email': st.user.email
+            'email': st.user.email,
+            'plan': plan
         }
     
     pg_2 = st.navigation([
@@ -46,7 +49,7 @@ else:
 
     if user['email'] in emails:
         col_users.update_one({'email': user['email']}, {"$inc": {'number_of_access': 1}, "$set": {'last_seen_on': datetime.now()}})
-        user_on_db = list(col_users.find({'email': user['email']}))[0]
+        
     else:
         user['number_of_access'] = 1
         user['last_seen_on'] = datetime.now()
@@ -58,9 +61,9 @@ else:
     if st.button("Log out", width=250, type='primary'):
         st.logout()
     st.write(f"Hello, {user['name']}!")
-    if user_on_db['plan'] == 'premium':
+    if user['plan'] == 'premium':
         st.badge("Plan: Premium", icon=":material/check:", color="green")
-    elif user_on_db['plan'] == 'free':
+    elif user['plan'] == 'free':
         st.badge("Plan: Free")
     else:
         st.warning('Something went wrong!')
