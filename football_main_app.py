@@ -27,15 +27,19 @@ if not st.user.is_logged_in:
         st.login()
 else:
     emails = col_users.distinct('email')
-    user_on_db = list(col_users.find({'email': user['email']}))[0]
-    plan = 'premium' if user_on_db['plan'] is True and user_on_db['plan'] == 'premium' else 'free' 
+    
     user = {
             'given_name': st.user.given_name, 
             'family_name': st.user.family_name, 
             'name': st.user.name, 
-            'email': st.user.email,
-            'plan': plan
+            'email': st.user.email
         }
+    
+    user_on_db = list(col_users.find({'email': user['email']}))[0]
+    
+    plan = 'premium' if user_on_db['plan'] is True and user_on_db['plan'] == 'premium' else 'free'
+    user['plan'] = plan
+    
     
     pg_2 = st.navigation([
         st.Page('pages/home.py', title='Home'),
