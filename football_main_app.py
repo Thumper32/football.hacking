@@ -68,7 +68,7 @@ else:
     
     if st.button("Log out", width=250, type='primary'):
         st.logout()
-    st.write(f"Hello, {user['name']}!")
+    st.write(f"Hello, {user_session['name']}!")
     if user_session['plan'] == 'premium':
         st.badge("Plan: Premium", icon=":material/star_shine:", color="green")
     elif user_session['plan'] == 'free':
