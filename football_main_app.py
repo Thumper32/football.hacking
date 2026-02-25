@@ -33,6 +33,8 @@ else:
             'name': st.user.name, 
             'email': st.user.email
         }
+
+    plan = list(col_users.find({'email': user['email']}))['plan']
     
     pg_2 = st.navigation([
         st.Page('pages/home.py', title='Home'),
@@ -57,7 +59,7 @@ else:
     if st.button("Log out", width=250, type='primary'):
         st.logout()
     st.write(f"Hello, {user['name']}!")
-    if user['plan'] == 'premium':
+    if plan == 'premium':
         st.badge("Plan: Premium", icon=":material/check:", color="green")
     else:
         st.badge("Plan: Free")
