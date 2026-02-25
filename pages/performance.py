@@ -34,7 +34,7 @@ if st.session_state['logged_in']:
     
     def get_teams_dict(venue: str, collection: collection, seasons: list, leagues: list) -> dict:
         teams_data = {}
-        teams = list(collection.find({'general.country': {"$nin": cups}, 'general.league': {'$in': leagues}, 'general.season': {'$in': seasons}}, {"general.country": 1, "general.league": 1, 'general.season': 1, f"teams.{venue}.name": 1}))
+        teams = list(collection.find({'general.country': {"$nin": INT}, 'general.league': {'$in': leagues}, 'general.season': {'$in': seasons}}, {"general.country": 1, "general.league": 1, 'general.season': 1, f"teams.{venue}.name": 1}))
     
         for team in teams:
             team_name = team['teams'][venue]['name']
