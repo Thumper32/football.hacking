@@ -67,7 +67,7 @@ else:
         st.logout()
     st.write(f"Hello, {user['name']}!")
     if user['plan'] == 'premium':
-        st.badge("Plan: Premium", icon=":material/check:", color="green")
+        st.badge("Plan: Premium", icon=":material/star_shine:", color="green")
     elif user['plan'] == 'free':
         st.badge("Plan: Free")
     else:
