@@ -60,8 +60,10 @@ else:
     st.write(f"Hello, {user['name']}!")
     if user_on_db['plan'] == 'premium':
         st.badge("Plan: Premium", icon=":material/check:", color="green")
-    else:
+    elif user_on_db['plan'] == 'free':
         st.badge("Plan: Free")
+    else:
+        st.warning('Something went wrong!')
 
 with st.sidebar:
     st.image('static/image.png', 
