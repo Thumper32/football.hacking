@@ -37,8 +37,7 @@ else:
     
     user_on_db = list(col_users.find({'email': user['email']}))[0]
     try:
-        plan = user_on_db['plan']
-        user['plan'] = plan
+        user['plan'] = user_on_db['plan']
     except Exception:
         user['plan'] = 'free'
     
