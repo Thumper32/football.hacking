@@ -23,15 +23,15 @@ if st.session_state['logged_in']:
     
     #function to get the data of the selected match
     @st.cache_data(show_spinner=False)
-    def get_match(home: str, away: str, seasons: list) -> dict:
-        match = col.find_one({'teams.home.name': home, 'teams.away.name': away, 'general.season': {'$in': seasons}})
+    def get_match(home: str, away: str, seasons: list, leagues: list) -> dict:
+        match = col.find_one({'teams.home.name': home, 'general.league': {'$in': leagues}, 'teams.away.name': away, 'general.season': {'$in': seasons}})
     
         return match
     
     #function to get complete names for teams
-    def get_teams_dict(venue: str, collection: collection, exclude: list, seasons: list) -> dict:
+    def get_teams_dict(venue: str, collection: collection, exclude: list, seasons: list, leagues: list) -> dict:
         teams_data = {}
-        teams = list(collection.find({'general.country': {"$nin": exclude}, 'general.season': {'$in': seasons}}, {"general.country": 1, "general.league": 1, f"teams.{venue}.name": 1}))
+        teams = list(collection.find({'general.country': {"$nin": exclude}, 'general.league': {'$in': leagues}, 'general.season': {'$in': seasons}}, {"general.country": 1, "general.league": 1, f"teams.{venue}.name": 1}))
         
     
         for team in teams:
@@ -78,8 +78,8 @@ if st.session_state['logged_in']:
     
     #page title
     st.header('Plot the stats of a selected match – national leagues only')
-    home_teams = get_teams_dict(venue='home', collection=col, exclude=cups, seasons=SEASONS)
-    away_teams = get_teams_dict(venue='away', collection=col, exclude=cups, seasons=SEASONS)
+    home_teams = get_teams_dict(venue='home', collection=col, exclude=cups, seasons=SEASONS, leagues=leagues)
+    away_teams = get_teams_dict(venue='away', collection=col, exclude=cups, seasons=SEASONS, leagues=leagues)
     home_names = list(home_teams.keys())
     away_names = list(away_teams.keys())
     
@@ -91,7 +91,7 @@ if st.session_state['logged_in']:
             st.session_state['home'] = home_teams[home]['name']
             st.session_state['away'] = away_teams[away]['name']
     
-            match = get_match(st.session_state['home'], st.session_state['away'], SEASONS)
+            match = get_match(st.session_state['home'], st.session_state['away'], SEASONS, leagues=leagues)
             if not match:
                 st.text("This match may not have occurred yet, or the teams may not belong to the same national league")
             else:
