@@ -95,4 +95,5 @@ with st.sidebar:
     st.link_button('E-Book Aposta Consciente', "subscribepage.io/aposta-consciente", width='stretch')
     st.link_button("Instagram", "https://www.instagram.com/football.hacking/", width='stretch')
     st.link_button("X", "https://x.com/footballhacking", use_container_width=True)
-    st.link_button('YouTube', 'https://www.youtube.com/channel/UCkSw2eyetrr8TByFis0Uyug', width='stretch')    
+    st.link_button('YouTube', 'https://www.youtube.com/channel/UCkSw2eyetrr8TByFis0Uyug', width='stretch')
+    st.link_button('LinkedIn', 'https://www.linkedin.com/in/saulo-faria-data/', width='stretch')
