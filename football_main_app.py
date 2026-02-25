@@ -29,56 +29,60 @@ if not st.user.is_logged_in:
     if st.button("Log in with Google", width=250, type='primary'):
         st.login()
 else:
-    emails = col_users.distinct('email')
-    
-    user = {
-            'given_name': st.user.given_name, 
-            'family_name': st.user.family_name, 
-            'name': st.user.name, 
-            'email': st.user.email
-        }
-    
-    user_on_db = list(col_users.find({'email': user['email']}))[0]
     try:
-        user['plan'] = user_on_db['plan']
-    except Exception:
-        user['plan'] = 'free'
+        emails = col_users.distinct('email')
         
-    if 'user' not in st.session_state:
-        st.session_state['user'] = user
-
-    user_session = st.session_state['user']
-    pg_2 = st.navigation([
-        st.Page('pages/home.py', title='Home'),
-        st.Page('pages/poisson_preds.py', title='Poisson Preds'),
-        st.Page('pages/leagues_overview.py', title='League Overview'), 
-        st.Page('pages/match_analysis.py', title='Match xG Stats'), 
-        st.Page('pages/performance.py', title='Relative Performance'), 
-        st.Page('pages/xt_stats_app.py', title='Passes Metrics'),
-        st.Page('pages/about.py', title='About Me')
-    ], position='top')
-
-    if user['email'] in emails:
-        col_users.update_one({'email': user_session['email']}, {"$inc": {'number_of_access': 1}, "$set": {'last_seen_on': datetime.now()}})
+        user = {
+                'given_name': st.user.given_name, 
+                'family_name': st.user.family_name, 
+                'name': st.user.name, 
+                'email': st.user.email
+            }
         
-    else:
-        user_session['number_of_access'] = 1
-        user_session['last_seen_on'] = datetime.now()
-        user_session['on_mailing_list'] = False
-        col_users.insert_one(user_session)
-
-    st.session_state['logged_in'] = True
-    pg_2.run()
+        user_on_db = list(col_users.find({'email': user['email']}))[0]
+        try:
+            user['plan'] = user_on_db['plan']
+        except Exception:
+            user['plan'] = 'free'
+            
+        if 'user' not in st.session_state:
+            st.session_state['user'] = user
     
-    if st.button("Log out", width=250, type='primary'):
-        st.logout()
-    st.write(f"Hello, {user_session['name']}!")
-    if user_session['plan'] == 'premium':
-        st.badge("Plan: Premium", icon=":material/star_shine:", color="green")
-    elif user_session['plan'] == 'free':
-        st.badge("Plan: Free")
-    else:
-        st.warning('Something went wrong!')
+        user_session = st.session_state['user']
+        pg_2 = st.navigation([
+            st.Page('pages/home.py', title='Home'),
+            st.Page('pages/poisson_preds.py', title='Poisson Preds'),
+            st.Page('pages/leagues_overview.py', title='League Overview'), 
+            st.Page('pages/match_analysis.py', title='Match xG Stats'), 
+            st.Page('pages/performance.py', title='Relative Performance'), 
+            st.Page('pages/xt_stats_app.py', title='Passes Metrics'),
+            st.Page('pages/about.py', title='About Me')
+        ], position='top')
+    
+        if user['email'] in emails:
+            col_users.update_one({'email': user_session['email']}, {"$inc": {'number_of_access': 1}, "$set": {'last_seen_on': datetime.now()}})
+            
+        else:
+            user_session['number_of_access'] = 1
+            user_session['last_seen_on'] = datetime.now()
+            user_session['on_mailing_list'] = False
+            col_users.insert_one(user_session)
+    
+        st.session_state['logged_in'] = True
+        pg_2.run()
+        
+        if st.button("Log out", width=250, type='primary'):
+            st.logout()
+        st.write(f"Hello, {user_session['name']}!")
+        if user_session['plan'] == 'premium':
+            st.badge("Plan: Premium", icon=":material/star_shine:", color="green")
+        elif user_session['plan'] == 'free':
+            st.badge("Plan: Free")
+            st.warning("Become a premium subscriber to the Football Hacking newsletter to get access to all the leagues in our database and receive exclusive content straight to your inbox. Link in the sidebar.")
+        else:
+            st.warning('Something went wrong!')
+    except Exception:
+        st.text(' ')
 
 with st.sidebar:
     st.image('static/image.png', 
