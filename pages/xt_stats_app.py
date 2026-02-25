@@ -416,8 +416,8 @@ if st.session_state['logged_in']:
     st.title('Pass and Expected Threat(xT) Information - Current Season')
     
     # get teams names
-    home_names = get_names(venue='home')
-    away_names = get_names(venue='away')
+    home_names = get_names(venue='home', leagues=leagues)
+    away_names = get_names(venue='away', leagues=leagues)
     
     submitted, home, away = input_form()
     
@@ -426,7 +426,7 @@ if st.session_state['logged_in']:
             st.session_state['home'] = home
             st.session_state['away'] = away
     
-            match = get_match_data(home_team=st.session_state['home'], away_team=st.session_state['away'])
+            match = get_match_data(home_team=st.session_state['home'], away_team=st.session_state['away'], leagues=leagues)
             if not match:
                 st.text("This match may not have occurred yet, or the teams may not belong to the same national league")
             else:
