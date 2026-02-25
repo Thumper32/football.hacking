@@ -27,7 +27,7 @@ if st.session_state['logged_in']:
     #get data from mongodb database
     @st.cache_data(show_spinner=False)
     def get_stats(cups: list, team: str, league: str, seasons: list) -> list:
-        stats = list(col.aggregate([{"$match": {"general.country": {"$nin": INT}, 'general.season': {'$in': seasons}, "general.league": league, "$or": [{"teams.home.name": team}, {"teams.away.name": team}]}}, 
+        stats = list(col.aggregate([{"$match": {"general.country": {"$nin": cups}, 'general.season': {'$in': seasons}, "general.league": league, "$or": [{"teams.home.name": team}, {"teams.away.name": team}]}}, 
                            {"$project": {"_id": 0, "general.round": 1, 'general.season': 1, "general.league": 1,"teams.home.name": 1, "teams.away.name": 1, "stats": 1, 'result': 1}}]))
         return stats
         
@@ -106,7 +106,7 @@ if st.session_state['logged_in']:
                 xg_op_opp = []
                 touch_opp_opp = []
     
-                opp_stats = get_stats(cups=cups, team=opp, league=stat['general']['league'], seasons=seasons)
+                opp_stats = get_stats(cups=INT, team=opp, league=stat['general']['league'], seasons=seasons)
                 for stat_opp in opp_stats:                    
                     matchweek_opp = int(stat_opp['general']['round'][6:]) if len(stat_opp['general']['round']) > 6 else int(stat_opp['general']['round'])
                     if matchweek_opp < matchweek:
@@ -160,7 +160,7 @@ if st.session_state['logged_in']:
                 squad = st.selectbox(label='Select a Squad', options=sorted(squads.keys()), index=0)
                 squad_data = col.find_one({'general.country': squads[squad]['country'], 'teams.home.name': squads[squad]['name']})
        
-                stats = get_stats(cups=cups, team=squads[squad]['name'], league=squads[squad]['league'], seasons=SEASONS)
+                stats = get_stats(cups=INT, team=squads[squad]['name'], league=squads[squad]['league'], seasons=SEASONS)
                 df = get_dataframe(stats, team=squads[squad]['name'], seasons=SEASONS)
                 
     
