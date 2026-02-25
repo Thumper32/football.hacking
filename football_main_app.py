@@ -36,9 +36,11 @@ else:
         }
     
     user_on_db = list(col_users.find({'email': user['email']}))[0]
-    
-    plan = 'premium' if user_on_db['plan'] is True and user_on_db['plan'] == 'premium' else 'free'
-    user['plan'] = plan
+    try:
+        plan = 'premium' if user_on_db['plan'] == 'premium' else 'free'
+        user['plan'] = plan
+    except Exception:
+        user['plan'] = 'free'
     
     
     pg_2 = st.navigation([
